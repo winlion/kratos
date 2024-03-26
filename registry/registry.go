@@ -48,6 +48,8 @@ type ServiceInstance struct {
 	//   http://127.0.0.1:8000?isSecure=false
 	//   grpc://127.0.0.1:9000?isSecure=false
 	Endpoints []string `json:"endpoints"`
+	// 支持多tag
+	Tags []string `json:"tags"`
 }
 
 func (i *ServiceInstance) String() string {
@@ -87,6 +89,12 @@ func (i *ServiceInstance) Equal(o interface{}) bool {
 
 	for k, v := range i.Metadata {
 		if v != t.Metadata[k] {
+			return false
+		}
+	}
+
+	for k, v := range i.Tags {
+		if v != t.Tags[k] {
 			return false
 		}
 	}

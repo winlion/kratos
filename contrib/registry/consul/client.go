@@ -161,7 +161,7 @@ func (c *Client) Register(_ context.Context, svc *registry.ServiceInstance, enab
 		ID:              svc.ID,
 		Name:            svc.Name,
 		Meta:            svc.Metadata,
-		Tags:            []string{fmt.Sprintf("version=%s", svc.Version)},
+		Tags:            append([]string{fmt.Sprintf("version=%s", svc.Version)}, svc.Tags...),
 		TaggedAddresses: addresses,
 	}
 	if len(checkAddresses) > 0 {
